@@ -167,7 +167,7 @@ def main():
 
         try:
             author = settings["usermapping"][cl.submitter]
-            author = author["name"] + " <" + author["email"] + ">"
+            author_name_email = author["name"] + " <" + author["email"] + ">"
             os.environ["GIT_COMMITTER_NAME"] = author["name"]
             os.environ["GIT_COMMITTER_EMAIL"] = author["email"]
 
@@ -176,7 +176,7 @@ def main():
 
             message = "\n".join(cl.description_lines)
 
-            completed_process = git("-C", args.outputPath, "commit", "-m", message, "--date", date, "--author=" + author)
+            completed_process = git("-C", args.outputPath, "commit", "-m", message, "--date", date, "--author=" + author_name_email)
         except subprocess.CalledProcessError as e:
             print("ERROR:", e)
             return
